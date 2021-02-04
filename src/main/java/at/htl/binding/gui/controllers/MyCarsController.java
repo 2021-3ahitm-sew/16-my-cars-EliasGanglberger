@@ -5,6 +5,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
@@ -71,11 +73,11 @@ public class MyCarsController {
         secondHalfCheckBox.selectedProperty().bind(
                 selectedIndex.greaterThanOrEqualTo(Bindings.size(cars).divide(2))
         );
+        filterCheckBoxEvents();
     }
 
     private void initCarForm() {
         makerComboBox.setItems(makers.sorted());
-
         creationYearSpinner.setValueFactory(
                 new IntegerSpinnerValueFactory(1980, LocalDate.now().getYear(), 2018)
         );
@@ -106,5 +108,12 @@ public class MyCarsController {
         creationYearSpinner.getValueFactory().setValue(2018);
         registrationDatePicker.getEditor().clear();
         electricCheckBox.setSelected(false);
+    }
+
+    private void filterCheckBoxEvents(){
+        firstCheckBox.addEventFilter(EventType.ROOT, Event::consume);
+        firstHalfCheckBox.addEventFilter(EventType.ROOT, Event::consume);
+        secondHalfCheckBox.addEventFilter(EventType.ROOT, Event::consume);
+        lastCheckBox.addEventFilter(EventType.ROOT, Event::consume);
     }
 }
