@@ -44,7 +44,6 @@ public class MyCarsController {
             "Tesla"
     );
 
-
     @FXML
     private void initialize() {
         initListView();
@@ -98,6 +97,14 @@ public class MyCarsController {
                 electricCheckBox.isSelected()
         );
         cars.add(car);
+        clearCarForm();
     }
 
+    private void clearCarForm(){
+        modelTextField.clear();
+        makerComboBox.getSelectionModel().clearSelection();
+        creationYearSpinner.getValueFactory().setValue(2018);
+        registrationDatePicker.getEditor().clear();
+        electricCheckBox.setSelected(false);
+    }
 }
